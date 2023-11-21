@@ -7,7 +7,7 @@ import os
 import pandas as pd
 from scipy.stats import binom_test  # Added missing import
 
-for dirname, _, filenames in os.walk('../Diabetes'):
+for dirname, _, filenames in os.walk('../Dataset Used'):
     for filename in filenames:
         print(os.path.join(dirname, filename))
 
@@ -15,7 +15,7 @@ for dirname, _, filenames in os.walk('../Diabetes'):
 
 
 # Read the CSV file
-df = pd.read_csv('../Diabetes/diabetes_prediction_dataset.csv')
+df = pd.read_csv('../Dataset Used/diabetes_prediction_dataset.csv')
 
 glucose_before = df['blood_glucose_level']
 glucose_after = df['blood_glucose_level_after']

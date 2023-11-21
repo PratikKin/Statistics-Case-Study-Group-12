@@ -9,12 +9,12 @@ import scipy.stats as stats
 
 import os
 
-for dirname, _, filenames in os.walk('../Diabetes'):
+for dirname, _, filenames in os.walk('../Dataset Used'):
     for filename in filenames:
         print(os.path.join(dirname, filename))
         
-male_df = pd.read_csv('../Unit II/male_glu.csv')
-female_df = pd.read_csv('../Unit II/female_glu.csv')
+male_df = pd.read_csv('../Dataset Used/male_glu.csv')
+female_df = pd.read_csv('../Dataset Used/female_glu.csv')
 
 # Extract the 'blood_glucose_level' column from each DataFrame
 male_glucose = male_df['blood_glucose_level']

@@ -6,17 +6,17 @@ from scipy.stats import mannwhitneyu
 import os
 import pandas as pd
 
-for dirname, _, filenames in os.walk('../Diabetes'):
+for dirname, _, filenames in os.walk('../Dataset Used'):
     for filename in filenames:
         print(os.path.join(dirname, filename))
         
-male_df = pd.read_csv('../Kaggle Coding/Unit II/male_glu.csv')
+male_df = pd.read_csv('../Dataset Used/male_glu.csv')
 male_glucose = male_df['blood_glucose_level']
 
 
 
 # Read the CSV files
-female_df = pd.read_csv('../Kaggle Coding/Unit II/male_glu.csv')
+female_df = pd.read_csv('../Diabetes/male_glu.csv')
 female_glucose = female_df['blood_glucose_level']
 
 

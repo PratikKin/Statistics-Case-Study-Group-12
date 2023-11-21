@@ -3,11 +3,11 @@ import pandas as pd
 import scipy.stats as stats
 import os
 
-for dirname, _, filenames in os.walk('../Diabetes'):
+for dirname, _, filenames in os.walk('../Dataset Used'):
     for filename in filenames:
         os.path.join(dirname, filename)
         
-df = pd.read_csv('../Diabetes/diabetes_prediction_dataset.csv')
+df = pd.read_csv('../Dataset Used/diabetes_prediction_dataset.csv')
 
 sample_size = int(input("Give sample size for data: "))
 new_df = df.sample(n=sample_size, random_state=1)

@@ -10,11 +10,11 @@ import scipy.stats as stats
 
 import os
 
-for dirname, _, filenames in os.walk('../Diabetes'):
+for dirname, _, filenames in os.walk('../Dataset Used'):
     for filename in filenames:
         print(os.path.join(dirname, filename))
         
-df = pd.read_csv('../Diabetes/diabetes_prediction_dataset.csv')
+df = pd.read_csv('../Dataset Used/diabetes_prediction_dataset.csv')
 
 new_df = df['blood_glucose_level']
 
@@ -57,6 +57,8 @@ def calc_CI(random_sample, sample_size,U1, z_tab):
 #--------------------------------------------------------------------------------------------
 
 U0 = df['blood_glucose_level'].mean()      #to get the mean
+
+
 
 print("\nHypothesis =>\n H0 : U0 = ", U0, "\n","H1 : U0 !=", U0, "\n")
 

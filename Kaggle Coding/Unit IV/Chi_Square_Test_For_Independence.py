@@ -3,12 +3,12 @@ import pandas as pd
 import scipy.stats as stats
 import os
 
-for dirname, _, filenames in os.walk('../Diabetes'):
+for dirname, _, filenames in os.walk('../Dataset Used'):
     for filename in filenames:
         os.path.join(dirname, filename)
 
-male_df = pd.read_csv('../Kaggle Coding/Unit II/male_glu.csv')
-female_df = pd.read_csv('../Kaggle Coding/Unit II/female_glu.csv')
+male_df = pd.read_csv('../Dataset Used/male_glu.csv')
+female_df = pd.read_csv('../Dataset Used/female_glu.csv')
 
 male_sample_size = int(input("Give sample size for male data: "))
 male_random_sample = male_df.sample(n=male_sample_size, random_state=1)
