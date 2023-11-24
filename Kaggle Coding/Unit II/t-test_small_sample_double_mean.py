@@ -2,19 +2,21 @@
 """
 Group Number : 12
 """
+# libraries
 
 import numpy as np 
 import pandas as pd
 import scipy.stats as stats
-
 import os
 
-for dirname, _, filenames in os.walk('../Dataset Used'):
+# connecting the paths of code and dataset
+for dirname, _, filenames in os.walk('../Diabetes'):
     for filename in filenames:
-        print(os.path.join(dirname, filename))
-        
-male_df = pd.read_csv('../Dataset Used/male_glu.csv')
-female_df = pd.read_csv('../Dataset Used/female_glu.csv')
+        os.path.join(dirname, filename)
+
+# reading CSV files        
+male_df = pd.read_csv('../Diabetes/male_glu.csv')
+female_df = pd.read_csv('../Diabetes/female_glu.csv')
 
 # Extract the 'blood_glucose_level' column from each DataFrame
 male_glucose = male_df['blood_glucose_level']
@@ -76,6 +78,7 @@ def calcCI(var1, var2, n1, n2, x_male, x_female):
 U1 = findMean(male_glucose)
 U2 = findMean(female_glucose)
 
+# getting samples from actual population
 n1 = int(input("Sampling size for male : "))
 n2 = int(input("Sampling size for female : "))
 
@@ -88,17 +91,19 @@ var2 = np.var(female_glucose)
 x_male = findMean(random_sample1)       #mean for the sample of male
 x_female = findMean(random_sample2)     #mean for the sample of female
 
-
+# getting t tabulated and calculated values
 t_cal=t_cal(U1, U2, var1, var2, n1, n2, x_male, x_female)
 
 t_tab = T_tab(0.05, n1+n2-2, False)
 
+# summarizing results
 if n1 < 30 and n2 < 30:
     if t_cal >= t_tab:
         print("Accept H0")
     else:
         print("Reject H0")
     
+    # getting confidence interval
     calcCI(var1, var2, n1, n2, x_male, x_female)
 else :
     print("Unable to compute")

@@ -1,24 +1,25 @@
 """
 Code written by Group 12    
 """
+
+# libraries
 import numpy as np
 from scipy.stats import mannwhitneyu
 import os
 import pandas as pd
 
-for dirname, _, filenames in os.walk('../Dataset Used'):
+# connecting the paths of code and dataset
+for dirname, _, filenames in os.walk('../Diabetes'):
     for filename in filenames:
-        print(os.path.join(dirname, filename))
-        
-male_df = pd.read_csv('../Dataset Used/male_glu.csv')
-male_glucose = male_df['blood_glucose_level']
+        os.path.join(dirname, filename)
 
-
-
-# Read the CSV files
+# Read the CSV file
+male_df = pd.read_csv('../Diabetes/male_glu.csv')
 female_df = pd.read_csv('../Diabetes/male_glu.csv')
-female_glucose = female_df['blood_glucose_level']
 
+#  Extract the 'blood_glucose_level' column from DataFrame
+male_glucose = male_df['blood_glucose_level']
+female_glucose = female_df['blood_glucose_level']
 
 # Perform the Mann-Whitney U test
 statistic, p_value = mannwhitneyu(male_glucose, female_glucose)

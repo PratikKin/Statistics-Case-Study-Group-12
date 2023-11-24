@@ -2,19 +2,23 @@
 """
 Group Number : 12
 """
+# libraries
 
 import numpy as np 
 import pandas as pd
 import scipy.stats as stats
-
 import os
 
-for dirname, _, filenames in os.walk('../Dataset Used'):
-    for filename in filenames:
-        print(os.path.join(dirname, filename))
-        
-df = pd.read_csv('../Dataset Used/diabetes_prediction_dataset.csv')
+# connecting the paths of code and dataset
 
+for dirname, _, filenames in os.walk('../Diabetes'):
+    for filename in filenames:
+        os.path.join(dirname, filename)
+        
+# reading CSV file
+df = pd.read_csv('../Diabetes/diabetes_prediction_dataset.csv')
+
+# getting only one column with name = "blood_glucose_level"  
 new_df = df['blood_glucose_level']
 
 #-------------------------------------------------------------------------
@@ -33,13 +37,11 @@ p0 = (filtered_df_len/new_df_len)
 n = int(input("Give the sample size : "))
 random_df = new_df.sample(n=n, random_state=1)
 
-random_df_len = len(random_df)
-
 filtered_random = random_df[random_df < 120] 
 
 filtered_random_len = len(filtered_random)
 
-p = (filtered_random_len/random_df_len)
+p = (filtered_random_len/n)
 
 print("\nThe proportion of people with blood sugar level less than 120 is : ",p0)
 
@@ -73,12 +75,17 @@ def calcCI(p0, n):
 #---------------------------------------------------------------------------------
 # Implementation
 
+# getting z calculated and tabulated values
 z_cal = Z_cal(p, p0, n)
 z_tab = Z_tab(0.05)
+
+# summarizing results
 
 if(z_cal <= z_tab):
     print("\nAccept H0")
 else:
     print("\nReject H0")
     
+# getting confidence interval
+
 calcCI(p0, n)

@@ -2,19 +2,22 @@
 """
 Group Number : 12
 """
+# libraries
 
 import numpy as np 
 import pandas as pd
 import scipy.stats as stats
-
 import os
 
-for dirname, _, filenames in os.walk('../Dataset Used'):
+# connecting the paths of code and dataset
+
+for dirname, _, filenames in os.walk('../Diabetes'):
     for filename in filenames:
-        print(os.path.join(dirname, filename))
+        os.path.join(dirname, filename)
         
-male_df = pd.read_csv('../Dataset Used/male_glu.csv')
-female_df = pd.read_csv('../Dataset Used/female_glu.csv')
+# reading CSV files
+male_df = pd.read_csv('../Diabetes/male_glu.csv')
+female_df = pd.read_csv('../Diabetes/female_glu.csv')
 
 # Extract the 'blood_glucose_level' column from each DataFrame
 male_glucose = male_df['blood_glucose_level']
@@ -27,9 +30,6 @@ n1 = int(input("Give the sample size for male: "))
 n2 = int(input("Give the sample size for female: "))
 random_male_df = male_glucose.sample(n=n1, random_state=1)
 random_female_df = female_glucose.sample(n=n2, random_state=1)
-
-random_male_df_len = len(random_male_df)
-random_female_df_len = len(random_female_df)
 
 filtered_random_male = random_male_df[random_male_df < 120] 
 filtered_random_female = random_female_df[random_female_df < 120] 
@@ -78,13 +78,15 @@ def calcCI(p1, p2, n1, n2, P):
 #-------------------------------------------------------------------------------------------
 # Implementation ->
 
+# getting z calculated and tabulated values
 z_tab = Z_tab(0.05)
-
 z_cal = Z_cal(_p1, _p2, P, n1, n2)
 
+# summarizing results
 if z_cal <= z_tab:
     print("Accept H0")
 else:
     print("Reject H0")
     
+# getting confidence interval
 calcCI(_p1, _p2,  n1, n2, P)

@@ -2,19 +2,22 @@
 """
 Group Number : 12
 """
+# libraries
 
 import numpy as np 
 import pandas as pd
 import scipy.stats as stats
-
 import os
 
-for dirname, _, filenames in os.walk('../Dataset Used'):
+# connecting the paths of code and dataset
+for dirname, _, filenames in os.walk('../Diabetes'):
     for filename in filenames:
-        print(os.path.join(dirname, filename))
+        os.path.join(dirname, filename)
         
-df = pd.read_csv('../Dataset Used/diabetes_prediction_dataset.csv')
+# reading CSV files      
+df = pd.read_csv('../Diabetes/diabetes_prediction_dataset.csv')
 
+# getting only one column with name = "blood_glucose_level"  
 new_df = df['blood_glucose_level']
 
 #--------------------------------------------------------------------------------------------------
@@ -54,27 +57,31 @@ def calc_CI(random_sample, sample_size,U1, t_tab):
 #------------------------------------------------------------------------------------------------------------------------
 # Implementation
 
-
-U0 = df['blood_glucose_level'].mean()      #to get the mean
+U0 = new_df.mean()      #to get the mean
 
 # Two tailed testing
-
 print("\nHypothesis=>\n H0 : U1 = ", U0, "\nH1 : U1 != ", U0)
 
 # get the samples
 n = int(input("Give sample size : "))
-random_sample = column_data.sample(n=n, random_state=1)
+random_sample = new_df.sample(n=n, random_state=1)
 U1 = random_sample.mean()
 
+# get t tabulated values 
 t_tab = T_tab(0.05, n-1, True)
 
 # we can work only if n < 30 =>
 if(n < 30):
+    # get t calculated values
     t_cal = t_cal(random_sample, n, U0, U1)
+    
+    # summarizing results
     if(t_cal >= t_tab):
         print("Accept H0")
     else:
         print("Reject H0")
+        
+    # getting confidence interval
     calc_CI(random_sample, n, U1, t_tab)
 else:
     print("Unable to calculate")

@@ -1,20 +1,26 @@
+# libraries
 import numpy as np
 import pandas as pd
 import scipy.stats as stats
 import os
 
-for dirname, _, filenames in os.walk('../Dataset Used'):
+# connecting the paths of code and dataset
+for dirname, _, filenames in os.walk('../Diabetes'):
     for filename in filenames:
         os.path.join(dirname, filename)
-        
-df = pd.read_csv('../Dataset Used/diabetes_prediction_dataset.csv')
 
+# reading CSV files
+df = pd.read_csv('../Diabetes/diabetes_prediction_dataset.csv')
+
+# selecting random sample
 sample_size = int(input("Give sample size for data: "))
 new_df = df.sample(n=sample_size, random_state=1)
 
+# selecting only specific columns from random sample
 selected_columns = ['diabetes', 'heart_disease', 'hypertension']
 selected_data = new_df[selected_columns]
 
+# changing selected_data to array for ease of calculations
 selected_array = selected_data.to_numpy()
 
 # Calculate the number of ones and zeros separately for each column
@@ -31,7 +37,11 @@ result_2d_array = np.vstack((result_2d_array, column_sums))
 # Create a DataFrame to display the results
 result_df = pd.DataFrame(result_2d_array, columns=['Yes', 'No', 'Sum'], index=selected_columns + ['Total'])
 
+# printing data stored for reference
 print(result_df)
+
+#--------------------------------------------------------------------------------------------
+
 def Chi_Sq_Cal(habit_2d):
     output_shape = (habit_2d.shape[0] - 1, habit_2d.shape[1] - 1)
     A = np.zeros(output_shape)
@@ -54,14 +64,16 @@ def Chi_Sq_Cal(habit_2d):
             
     return sum_of_differences, degree_of_freedom
 
+#----------------------------------------------------------------------------
 
+# getting calculated values
 chi_sq_cal, dof = Chi_Sq_Cal(result_2d_array)
-print(chi_sq_cal)
-print(dof)
+
+# getting tabulated values
 alpha =  0.05
 chi_sq_tab = stats.chi2.ppf(1 - alpha, dof)
-print(chi_sq_tab)
 
+# summarizing results
 if(chi_sq_cal <= chi_sq_tab):
     print("Accept H0")
 else:

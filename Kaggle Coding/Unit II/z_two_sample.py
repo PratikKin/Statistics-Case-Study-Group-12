@@ -3,20 +3,23 @@
 Group Number : 12
 """
 
+# libraries
 import numpy as np 
 import pandas as pd
 import scipy.stats as stats
-
 import os
 
-for dirname, _, filenames in os.walk('../Dataset Used'):
+# connecting the paths of code and dataset
+for dirname, _, filenames in os.walk('../Diabetes'):
     for filename in filenames:
-        print(os.path.join(dirname, filename))
+        os.path.join(dirname, filename)
         
-male_df = pd.read_csv('../Dataset Used/male_glu.csv')
-female_df = pd.read_csv('../Dataset Used/female_glu.csv')
+# reading CSV files
+male_df = pd.read_csv('../Diabetes/male_glu.csv')
+female_df = pd.read_csv('../Diabetes/female_glu.csv')
 
 # Extract the 'blood_glucose_level' column from each DataFrame
+
 male_glucose = male_df['blood_glucose_level']
 female_glucose = female_df['blood_glucose_level']
 
@@ -37,7 +40,7 @@ def findMean(population):
 
 #get the error term
 def findError(var1, var2, n1, n2):
-    error = np.sqrt((var1/n1) + (var2/n2))
+    error = np.sqrt((var1/(n1-1)) + (var2/(n2-1)))
     return error
 
 #get the Z tabulated value
@@ -72,6 +75,8 @@ def calcCI(var1, var2, n1, n2, x_male, x_female):
 U1 = findMean(male_glucose)
 U2 = findMean(female_glucose)
 
+# generating random samples from known population
+
 n1 = int(input("Sampling size for male : "))
 n2 = int(input("Sampling size for female : "))
 
@@ -84,13 +89,18 @@ var2 = np.var(female_glucose)
 x_male = findMean(random_sample1)
 x_female = findMean(random_sample2)
 
+# getting z calculated and tabulated values
+
 z_cal=Z_cal(U1, U2, var1, var2, n1, n2, x_male, x_female)
 
 z_tab = Z_tab(0.05)
 
+# finalizing results
 if z_cal <= z_tab:
     print("Accept H0")
 else:
     print("Reject H0")
+    
+# printing Confidence Interval
     
 calcCI(var1, var2, n1, n2, x_male, x_female)

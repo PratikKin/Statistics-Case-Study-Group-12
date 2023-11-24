@@ -1,21 +1,23 @@
 """
 Code written by Group 12    
 """
+
+# libraries
 import numpy as np
 import os
 import pandas as pd
-from scipy.stats import wilcoxon  # Added missing import
+from scipy.stats import wilcoxon
 
-for dirname, _, filenames in os.walk('../Dataset Used'):
+# connecting the paths of code and dataset
+for dirname, _, filenames in os.walk('../Diabetes'):
     for filename in filenames:
-        print(os.path.join(dirname, filename))
-
-# Specify the correct relative path to the CSV file
+        os.path.join(dirname, filename)
 
 
 # Read the CSV file
-df = pd.read_csv('../Dataset Used/diabetes_prediction_dataset.csv')
+df = pd.read_csv('../Diabetes/diabetes_prediction_dataset.csv')
 
+# Extract the 'blood_glucose_level' and 'blood_glucose_level_after' column from each DataFrame
 glucose_before = df['blood_glucose_level']
 glucose_after = df['blood_glucose_level_after']
 

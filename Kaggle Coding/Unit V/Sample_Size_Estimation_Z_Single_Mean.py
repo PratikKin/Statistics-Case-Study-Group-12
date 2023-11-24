@@ -1,21 +1,24 @@
+# libraries
 import numpy as np 
 import pandas as pd
 import scipy.stats as stats
-
 import os
 
-for dirname, _, filenames in os.walk('../Dataset Used'):
+# connecting the paths of code and dataset
+for dirname, _, filenames in os.walk('../Diabetes'):
     for filename in filenames:
         os.path.join(dirname, filename)
-        
-df = pd.read_csv('../Dataset Used/diabetes_prediction_dataset.csv')
 
+# reading CSV file
+df = pd.read_csv('../Diabetes/diabetes_prediction_dataset.csv')
+
+# getting only one column with name = "blood_glucose_level" 
 new_df = df['blood_glucose_level']
 
 
-population_std = np.std(new_df)   # Replace with the known population standard deviation
-margin_of_error = 5  # Replace with the desired margin of error
-confidence_level = 0.05  # Replace with the desired confidence level (e.g., 0.95 for 95%)
+population_std = np.std(new_df)
+margin_of_error = 0.5  # Replace with the desired margin of error
+alpha = 0.05  
 
 
 ### ------------------------------------------------------------------
@@ -29,7 +32,8 @@ def calculate_sample_size(population_std, margin_of_error, alpha):
 
     return int(np.ceil(required_sample_size))  # Round up to ensure a sufficient sample size
 
-# Example usage:
+## -------------------------------------------------------------------
+# Calculations
 
-sample_size = calculate_sample_size(population_std, margin_of_error, confidence_level)
+sample_size = calculate_sample_size(population_std, margin_of_error, alpha)
 print(f"Estimated sample size: {sample_size}")
