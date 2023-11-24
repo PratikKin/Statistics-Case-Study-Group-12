@@ -65,6 +65,10 @@ e22 = (c+d)*(b+d)/(a+b+c+d)
     
 # we can only proceed if any one of the expected cell frequencies is less than 5
 if(e11 < 5 or e12 < 5 or e21 < 5 or e22 < 5):
+    
+    # Hypothesis
+    print("Hypothesis : \nH0 : There is no relationship between Diabetes and Heart Disease.\nH1 : There is a relationship between Diabetes and Heart Disease.")
+
     chi_sq_cal = Chi_Sq_2X2(N, result_2d_array)
 
     alpha = 0.05

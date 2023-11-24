@@ -66,6 +66,9 @@ def Chi_Sq_Cal(habit_2d):
 
 #----------------------------------------------------------------------------
 
+# Hypothesis
+print("Hypothesis : \nH0 : Data is homogenous\nH1 : Data is not homogenous")
+
 # getting calculated values
 chi_sq_cal, dof = Chi_Sq_Cal(result_2d_array)
 

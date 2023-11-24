@@ -39,9 +39,11 @@ print("Number of positive differences:", positive_diff_count)
 print("Number of negative differences:", negative_diff_count)
 print("P-value:", p_value)
 
+print("Hypothesis : \nH0 : There is significant difference in before and after blood glucose level. \nH1 : There is no significant difference in before and after blood glucose level")
+
 # Interpret the results
 alpha = 0.05
 if p_value < alpha:
     print("Reject the null hypothesis: There is a significant difference between the paired samples.")
 else:
-    print("Fail to reject the null hypothesis: There is no significant difference between the paired samples.")
+    print("Fail to reject the null hypothesis: There is no significant difference between the paired samples.")

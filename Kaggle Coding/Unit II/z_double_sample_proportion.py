@@ -78,6 +78,10 @@ def calcCI(p1, p2, n1, n2, P):
 #-------------------------------------------------------------------------------------------
 # Implementation ->
 
+# hypothesis
+
+print("Hypothesis:\nH0 : p1 = p2 (claim)\nH1 : p1 != p2")
+
 # getting z calculated and tabulated values
 z_tab = Z_tab(0.05)
 z_cal = Z_cal(_p1, _p2, P, n1, n2)

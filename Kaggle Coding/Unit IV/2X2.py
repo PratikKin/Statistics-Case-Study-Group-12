@@ -42,12 +42,19 @@ def Chi_Sq_2X2(total_sum, resultantArray):
     b = resultantArray[0, 1]
     c = resultantArray[1, 0]
     d = resultantArray[1, 1]
+    
+    deno = (a + b) * (b + d) * (a + c) * (c + d)
+    num = total_sum * (a * d - b * c)**2
 
-    cal = ((total_sum * (a * d - b * c)**2) / ((a + b) * (b + d) * (a + c) * (c + d)))
+    cal = num / deno
     return cal
 
 # -----------------------------------------------------------------------
 # Calculations
+
+# Hypothesis
+
+print("Hypothesis : \nH0 : There is no relationship between Diabetes and Heart Disease.\nH1 : There is a relationship between Diabetes and Heart Disease.")
 
 # getting calculated values
 chi_sq_cal = Chi_Sq_2X2(N, result_2d_array)

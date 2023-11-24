@@ -64,12 +64,7 @@ def Chi_Sq_Cal(habit_2d):
 #-------------------------------------------------------------------------
 
 # stating Hypothesis
-H0 = "This is Independent"
-H1 = "This is not Independent"
-
-print("Hypothesis : \n")
-print(H0)
-print(H1, "\n")
+print("Hypothesis: \nH0 : People have disease independent of their gender.\nH1 : People don't have disease independent of their gender.")
 
 # getting calculated and tabulated values
 chi_sq_cal, dof = Chi_Sq_Cal(habit_counts_2d_array)

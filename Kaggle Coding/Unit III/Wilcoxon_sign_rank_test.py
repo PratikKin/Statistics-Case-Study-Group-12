@@ -31,6 +31,8 @@ statistic, p_value = wilcoxon(differences)
 print("Wilcoxon Signed-Rank Statistic:", statistic)
 print("P-value:", p_value)
 
+print("Hypothesis : \nH0 : There is a difference in the blood glucose level before and after blood glucose level. \nH1 : There is no difference in the blood glucose levels before and after blood glucose level.")
+
 # Interpret the results
 alpha = 0.05
 if p_value < alpha:

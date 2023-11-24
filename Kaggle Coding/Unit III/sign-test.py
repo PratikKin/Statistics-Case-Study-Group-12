@@ -4,8 +4,8 @@ Code written by Group 12
 # libraries
 
 import numpy as np
-import scipy.stats as stats
 import pandas as pd
+from scipy.stats import binom
 import os
 
 # connecting the paths of code and dataset
@@ -15,65 +15,39 @@ for dirname, _, filenames in os.walk('../Diabetes'):
         
 # Read the CSV file
 male_df = pd.read_csv('../Diabetes/male_glu.csv')
+female_df = pd.read_csv('../Diabetes/female_glu.csv')
 
 #  Extract the 'blood_glucose_level' column from DataFrame
 male_glucose = male_df['blood_glucose_level']
+female_glucose = female_df['blood_glucose_level']
 
-#---------------------------------------------------------------------------------
-# functions
+filtered_random_male = random_male_df[random_male_df < 120] 
+filtered_random_female = random_female_df[random_female_df < 120] 
 
-def subtract_median_and_get_sign(data, median): # Calculate the median
-    signs = []
-    positive_count = 0
-    negative_count = 0
+# Calculate differences between paired observations
+differences = [g1 - g2 for g1, g2 in zip(filtered_random_male, filtered_random_female)]
 
-    for value in data:
-        difference = value - median
-        if difference > 0:
-            signs.append('+')
-            positive_count += 1
-        elif difference < 0:
-            signs.append('-')
-            negative_count += 1
-        else:
-            signs.append('0')
+# Count positive and negative differences
+positive_diff = sum(1 for diff in differences if diff > 0)
+negative_diff = sum(1 for diff in differences if diff < 0)
 
-    sign_cal = min(positive_count, negative_count)
-    calculated_sample_size = abs(positive_count + negative_count)
-    return sign_cal, calculated_sample_size
+# Perform a binomial test on the counts
+n = positive_diff + negative_diff
+p_value = binom.cdf(min(positive_diff, negative_diff), n, 0.5) + binom.sf(min(positive_diff, negative_diff) - 1, n, 0.5)
 
-def get_median(data):
-    sorted_data = sorted(data)
-    median=0
-    n = len(sorted_data)
-    if n % 2 == 1:
-        median = sorted_data[n // 2]
-    else:
-        median = (sorted_data[(n - 1) // 2] + sorted_data[n // 2]) / 2
-    
-    return median
+print(f"Positive differences: {positive_diff}")
+print(f"Negative differences: {negative_diff}")
+print(f"P-value: {p_value}")
 
+# Significance level (alpha)
+alpha = 0.05
 
-def get_sign_tab_value(alpha, sample_size):
-    critical_value_upper = stats.binom.ppf(1 - alpha/2, sample_size, 0.5)
-    critical_value_lower = stats.binom.ppf(alpha/2, sample_size, 0.5)
-    
-    return critical_value_lower, critical_value_upper
+# Hypothesis
 
-#---------------------------------------------------------------------------
+print("Hypothesis: \nH0 : Median value of blood glucose level is less than 120. \nH1 : Median value of blood glucose level is more than 120")
 
-alpha = 0.05 
-median = get_median(male_glucose)
-
-# get sign_calculated value and actual sample size (given - n(0))
-sign_cal, sample_size = subtract_median_and_get_sign(male_glucose, median)
-
-# get sign calculated upper and lower values so that 
-# sign_lower <= sign_cal <= sign_upper
-sign_lower, sign_upper = get_sign_tab_value(alpha, sample_size)
-
-# summarizing results
-if sign_cal <= sign_lower or sign_cal >= sign_upper:
+# Compare p-value with alpha and make a decision
+if p_value < alpha:
     print("Reject the null hypothesis: There is a significant difference between the groups.")
 else:
-    print("Accept the null hypothesis: There is no significant difference between the groups.")
+    print("Fail to reject the null hypothesis: There is no significant difference between the groups.")
