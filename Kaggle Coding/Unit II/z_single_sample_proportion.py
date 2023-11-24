@@ -83,6 +83,10 @@ print("Hypothesis:\nH0 : p = 0.28 (claim)\nH1 : p != 0.28")
 z_cal = Z_cal(p, p0, n)
 z_tab = Z_tab(0.05)
 
+
+print("z_cal :",z_cal)
+print("z_tab :",z_tab)
+
 # summarizing results
 
 if(z_cal <= z_tab):

@@ -14,10 +14,14 @@ for dirname, _, filenames in os.walk('../Diabetes'):
         os.path.join(dirname, filename)
         
 # Read the CSV file
-male_df = pd.read_csv('../Diabetes/male_glu.csv')
+df = pd.read_csv('../Diabetes/diabetes_prediction_dataset.csv')
 
 #  Extract the 'blood_glucose_level' column from DataFrame
-male_glucose = male_df['blood_glucose_level']
+new_df = df['blood_glucose_level']
+
+# taking a random sample
+sample_size = int(input("Give sample size : "))
+random_sample = new_df.sample(n=sample_size, random_state=1)
 
 #---------------------------------------------------------------------------------
 # functions
@@ -63,14 +67,17 @@ def get_sign_tab_value(alpha, sample_size):
 #---------------------------------------------------------------------------
 
 alpha = 0.05 
-median = get_median(male_glucose)
+median = get_median(random_sample)
 
 # get sign_calculated value and actual sample size (given - n(0))
-sign_cal, sample_size = subtract_median_and_get_sign(male_glucose, median)
+sign_cal, sample_size = subtract_median_and_get_sign(random_sample, median)
 
 # get sign calculated upper and lower values so that 
 # sign_lower <= sign_cal <= sign_upper
 sign_lower, sign_upper = get_sign_tab_value(alpha, sample_size)
+print(sign_cal)
+print(sign_upper)
+print(sign_lower)
 
 # Hypothesis
 

@@ -86,6 +86,10 @@ print("Hypothesis:\nH0 : p1 = p2 (claim)\nH1 : p1 != p2")
 z_tab = Z_tab(0.05)
 z_cal = Z_cal(_p1, _p2, P, n1, n2)
 
+
+print("z_cal :",z_cal)
+print("z_tab :",z_tab)
+
 # summarizing results
 if z_cal <= z_tab:
     print("Accept H0")

@@ -62,6 +62,8 @@ e11 = (a+b)*(a+c)/(a+b+c+d)
 e12 = (a+b)*(b+d)/(a+b+c+d)
 e21 = (c+d)*(a+c)/(a+b+c+d)
 e22 = (c+d)*(b+d)/(a+b+c+d)
+
+print(result_2d_array)
     
 # we can only proceed if any one of the expected cell frequencies is less than 5
 if(e11 < 5 or e12 < 5 or e21 < 5 or e22 < 5):

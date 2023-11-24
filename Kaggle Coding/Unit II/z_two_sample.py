@@ -95,6 +95,10 @@ z_cal=Z_cal(U1, U2, var1, var2, n1, n2, x_male, x_female)
 
 z_tab = Z_tab(0.05)
 
+
+print("z_cal :",z_cal)
+print("z_tab :",z_tab)
+
 # finalizing results
 if z_cal <= z_tab:
     print("Accept H0")

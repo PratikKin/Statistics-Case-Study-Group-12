@@ -75,6 +75,10 @@ if(n < 30):
     # get t calculated values
     t_cal = t_cal(random_sample, n, U0, U1)
     
+    
+    print("t_cal :",t_cal)
+    print("t_tab :",t_tab)
+    
     # summarizing results
     if(t_cal >= t_tab):
         print("Accept H0")

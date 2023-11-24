@@ -17,9 +17,14 @@ for dirname, _, filenames in os.walk('../Diabetes'):
 # Read the CSV file
 df = pd.read_csv('../Diabetes/diabetes_prediction_dataset.csv')
 
+# taking a random sample
+sample_size = int(input("Give sample size : "))
+random_sample = df.sample(n=sample_size, random_state=1)
+
+
 # Extract the 'blood_glucose_level' and 'blood_glucose_level_after' column from each DataFrame
-glucose_before = df['blood_glucose_level']
-glucose_after = df['blood_glucose_level_after']
+glucose_before = random_sample['blood_glucose_level']
+glucose_after = random_sample['blood_glucose_level_after']
 
 # Calculate the differences
 differences = glucose_after - glucose_before

@@ -68,6 +68,8 @@ U1 = random_sample.mean()
 # getting z tabulated and calculated values
 z_tab = Z_tab(0.05, 1)
 z_cal = Z_cal(random_sample, sample_size, U0 ,U1)
+print("z_cal :",z_cal)
+print("z_tab :",z_tab)
 
 # summarizing results
 if z_cal <= z_tab:

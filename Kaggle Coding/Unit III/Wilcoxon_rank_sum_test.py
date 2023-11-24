@@ -21,11 +21,15 @@ female_df = pd.read_csv('../Diabetes/male_glu.csv')
 male_glucose = male_df['blood_glucose_level']
 female_glucose = female_df['blood_glucose_level']
 
+n1 = int(input("Sampling size for male : "))
+n2 = int(input("Sampling size for female : "))
+
+random_sample1 = male_glucose.sample(n=n1, random_state=1)
+random_sample2 = female_glucose.sample(n=n2, random_state=1)
 # Perform the Mann-Whitney U test
-statistic, p_value = mannwhitneyu(male_glucose, female_glucose)
+statistic, p_value = mannwhitneyu(random_sample1, random_sample2)
 
 # Print the results
-print("Mann-Whitney U Statistic:", statistic)
 print("P-value:", p_value)
 
 # Interpret the results

@@ -16,7 +16,7 @@ df = pd.read_csv('../Diabetes/diabetes_prediction_dataset.csv')
 # getting only one column with name = "blood_glucose_level" 
 population_glucose = df['blood_glucose_level']
 
-var = np.var(population_glucose)
+var = np.std(population_glucose)
 
 margin_of_error = 5
 alpha = 0.05

@@ -92,12 +92,17 @@ x_male = findMean(random_sample1)       #mean for the sample of male
 x_female = findMean(random_sample2)     #mean for the sample of female
 
 # getting t tabulated and calculated values
-t_cal=t_cal(U1, U2, var1, var2, n1, n2, x_male, x_female)
 
-t_tab = T_tab(0.05, n1+n2-2, False)
 
 # summarizing results
 if n1 < 30 and n2 < 30:
+    
+    t_cal=t_cal(U1, U2, var1, var2, n1, n2, x_male, x_female)
+
+    t_tab = T_tab(0.05, n1+n2-2, False)
+    
+    print("t_cal :",t_cal)
+    print("t_tab :",t_tab)
     if t_cal >= t_tab:
         print("Accept H0")
     else:
