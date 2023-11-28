@@ -35,7 +35,7 @@ N = np.sum(result_2d_array)
 
 # ----------------------------------------------------------------------
 # functions
-def Chi_Sq_2X2(total_sum, resultantArray):
+def Chi_Sq_2X2_yate(total_sum, resultantArray):
     a = resultantArray[0, 0]
     b = resultantArray[0, 1]
     c = resultantArray[1, 0]
@@ -71,7 +71,7 @@ if(e11 < 5 or e12 < 5 or e21 < 5 or e22 < 5):
     # Hypothesis
     print("Hypothesis : \nH0 : There is no relationship between Diabetes and Heart Disease.\nH1 : There is a relationship between Diabetes and Heart Disease.")
 
-    chi_sq_cal = Chi_Sq_2X2(N, result_2d_array)
+    chi_sq_cal = Chi_Sq_2X2_yate(N, result_2d_array)
 
     alpha = 0.05
     chi_sq_tab = stats.chi2.ppf(1-alpha, 1)

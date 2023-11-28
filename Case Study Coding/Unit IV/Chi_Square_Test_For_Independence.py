@@ -47,7 +47,7 @@ def Chi_Sq_Cal(habit_2d):
         for j in range(output_matrix[1]):
             ExpectedMatrix[i, j] = habit_2d[i, -1] * habit_2d[-1, j] / habit_2d[-1, -1]
 
-# Calculate the sum of (square of differences of values of O[i, j] and A[i, j]) divided by A[i, j]
+    # Calculate the sum of (square of differences of values of O[i, j] and A[i, j]) divided by A[i, j]
     sum_of_differences = 0
     for i in range(output_matrix[0]):
         for j in range(output_matrix[1]):

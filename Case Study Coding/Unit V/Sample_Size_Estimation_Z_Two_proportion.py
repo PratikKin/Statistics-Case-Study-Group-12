@@ -31,7 +31,6 @@ P1 = m1 / n1
 P2 = m2 / n2  
 
 margin_of_error = abs(P1 - P2)
-print(margin_of_error)
 alpha = 0.05
 beta = 0.20 
 
